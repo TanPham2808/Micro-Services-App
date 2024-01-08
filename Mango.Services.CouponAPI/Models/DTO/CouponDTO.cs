@@ -6,5 +6,6 @@
         public string CouponCode { get; set; }
         public decimal DiscountAmount { get; set; }
         public int MinAmout { get; set; }
+        public DateTime LastUpdated { get; set; }
     }
 }
