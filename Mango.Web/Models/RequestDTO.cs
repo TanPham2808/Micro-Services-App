@@ -2,7 +2,7 @@
 
 namespace Mango.Web.Models
 {
-    public class ReqestDTO
+    public class RequestDTO
     {
         public ApiType ApiType { get; set; } = ApiType.GET;
         public string Url { get; set; }

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "IUWE7yb0XdyvJBPFffTQUm8UZ8SHMy9CTqPiRCNB/dLMLEEmqb6ee1JwGxBWC3x9ENGmR5l4Q1rFxM5C5U13ww==",
+  "dgSpecHash": "v1nn6JdtN0cuOeNEmjbtuGnftqma4lBg/JOWMmgA0zLOzX9L3L5paanSrpfNp04oVM9K5j7UTYv0QuRWH9ymow==",
   "success": true,
   "projectFilePath": "D:\\Learning\\5. MicroService_MVC\\Mango\\Mango.Web\\Mango.Web.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\tan.phamx\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
