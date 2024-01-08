@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "BAIORhOAA0vEnKYC8AjaMzTa5rnca5vCkehJTf3+bHSUCrU4BoMZnZ7UwRM2M/85Kz4mqTg/XXYwqk52dpthGA==",
+  "success": true,
+  "projectFilePath": "D:\\Learning\\5. MicroService_MVC\\Mango\\Mango.Services.CouponAPI\\Mango.Services.CouponAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tan.phamx\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.7\\microsoft.aspnetcore.openapi.7.0.7.nupkg.sha512",
+    "C:\\Users\\tan.phamx\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\tan.phamx\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\tan.phamx\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\tan.phamx\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\tan.phamx\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\tan.phamx\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
