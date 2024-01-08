@@ -1,4 +1,4 @@
-using Mango.Services.CouponAPI.Data;
+﻿using Mango.Services.CouponAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,5 +28,21 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+ApplyMigration(); // Kiểm tra xem có quá trình Migrate nào đang chờ xử lý hay không. Nếu có thì chạy Migrate
 
 app.Run();
+
+void ApplyMigration()
+{
+    using(var scope = app.Services.CreateScope())
+    {
+        var _db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        // Kiểm tra có Migra nào chưa chạy ko
+        if(_db.Database.GetPendingMigrations().Count() > 0)
+        {
+            // Sẽ tự động chạy Migration
+            _db.Database.Migrate();
+        }
+    }
+}
