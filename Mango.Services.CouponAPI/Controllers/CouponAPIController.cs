@@ -56,5 +56,98 @@ namespace Mango.Services.CouponAPI.Controllers
 
             return _res;
         }
+
+        [HttpGet]
+        [Route("GetByCode/{code}")]
+        public ResponseDTO GetByCode(string code)
+        {
+            try
+            {
+                var coupon = _db.Coupons.First(x => x.CouponCode.ToLower() == code.ToLower());
+                _res.Result = _mapper.Map<CouponDTO>(coupon);
+            }
+            catch (Exception ex)
+            {
+                _res.IsSuccess = false;
+                _res.Message = ex.Message;
+            }
+
+            return _res;
+        }
+
+        [HttpPost]
+        public ResponseDTO POST([FromBody] CouponDTO couponDto)
+        {
+            try
+            {
+                Coupon coupon = _mapper.Map<Coupon>(couponDto);
+                _db.Coupons.Add(coupon);
+                _db.SaveChanges();
+
+
+                _res.Result = _mapper.Map<CouponDTO>(coupon);
+            }
+            catch (Exception ex)
+            {
+                _res.IsSuccess = false;
+                _res.Message = ex.Message;
+            }
+
+            return _res;
+        }
+
+        [HttpPut]
+        public ResponseDTO PUT([FromBody] CouponDTO couponDto)
+        {
+            try
+            {
+                var coupon = _db.Coupons.FirstOrDefault(x => x.CouponId == couponDto.CouponId);
+                if(coupon == null)
+                {
+                    _res.Message = "Don't have Coupon";
+                    return _res;
+                }
+
+                coupon.CouponCode = couponDto.CouponCode;
+                coupon.DiscountAmount = couponDto.DiscountAmount;
+                coupon.MinAmout = couponDto.MinAmout;
+
+                _db.Coupons.Update(coupon);
+                _db.SaveChanges();
+
+                _res.Result = coupon;
+            }
+            catch (Exception ex)
+            {
+                _res.IsSuccess = false;
+                _res.Message = ex.Message;
+            }
+
+            return _res;
+        }
+
+        [HttpDelete]
+        public ResponseDTO Delete(int id)
+        {
+            try
+            {
+                var coupon = _db.Coupons.FirstOrDefault(x => x.CouponId == id);
+                if (coupon == null)
+                {
+                    _res.Message = "Don't have Coupon";
+                    return _res;
+                }
+
+                _db.Coupons.Remove(coupon);
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _res.IsSuccess = false;
+                _res.Message = ex.Message;
+            }
+
+            return _res;
+        }
     }
 }
