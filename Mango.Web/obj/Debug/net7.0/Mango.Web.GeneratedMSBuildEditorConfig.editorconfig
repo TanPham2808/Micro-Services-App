@@ -16,6 +16,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Learning\5. MicroService_MVC\Mango\Mango.Web
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Learning/5. MicroService_MVC/Mango/Mango.Web/Views/Coupon/CouponCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cG9uXENvdXBvbkNyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Learning/5. MicroService_MVC/Mango/Mango.Web/Views/Coupon/CouponDelete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cG9uXENvdXBvbkRlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Learning/5. MicroService_MVC/Mango/Mango.Web/Views/Coupon/CouponIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cG9uXENvdXBvbkluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Learning/5. MicroService_MVC/Mango/Mango.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,6 +38,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Learning/5. MicroService_MVC/Mango/Mango.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Learning/5. MicroService_MVC/Mango/Mango.Web/Views/Shared/_Notification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Learning/5. MicroService_MVC/Mango/Mango.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
