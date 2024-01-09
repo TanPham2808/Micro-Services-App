@@ -1,4 +1,1 @@
-.vs/Mango/FileContentIndex/0c9e34e8-6f4d-4a2f-9079-e2e5b111f2e8.vsidx
-.vs/Mango/FileContentIndex/9421b293-8f94-4349-bc06-6b5fe703ec25.vsidx
-.vs/Mango/FileContentIndex/949ff110-0934-4510-8a01-8f469a3a69ef.vsidx
-.vs/Mango/FileContentIndex/e7cea9ce-5c85-4e51-b11f-27122e37fbbb.vsidx
+dotnet new gitignore
