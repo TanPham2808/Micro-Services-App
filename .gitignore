@@ -1,5 +1,3 @@
-dotnet new gitignore
-
 *.swp
 *.*~
 project.lock.json
