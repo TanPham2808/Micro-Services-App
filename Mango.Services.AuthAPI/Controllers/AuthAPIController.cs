@@ -45,7 +45,7 @@ namespace Mango.Services.AuthAPI.Controllers
                 return BadRequest(_responseDTO);
             }
 
-            return Ok(_responseDTO);
+            return Ok(loginResponse);
         }
     }
 }
