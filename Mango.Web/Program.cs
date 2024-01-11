@@ -1,6 +1,7 @@
 ﻿using Mango.Web.Service;
 using Mango.Web.Service.IService;
 using Mango.Web.Utility;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,14 @@ builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.ExpireTimeSpan = TimeSpan.FromHours(10);
+        option.LoginPath = "/Auth/Login"; // Nếu chưa đăng nhập sẽ chuyển hướng đến đăng nhập
+        option.AccessDeniedPath = "/Auth/AccessDenied"; // Chuyển đến trang truy cập bị từ chối
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +47,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

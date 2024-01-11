@@ -25,6 +25,10 @@ namespace Mango.Web.Service
             return hasToken is true ? token : SD.TokenCookie;
         }
 
+        /// <summary>
+        /// Lưu token vào cookie trong HttpContext
+        /// </summary>
+        /// <param name="token"></param>
         public void SetToken(string token)
         {
             _contextAccessor.HttpContext?.Response.Cookies.Append(SD.TokenCookie, token);
