@@ -19,7 +19,7 @@ namespace Mango.Web.Controllers
             if (respone!= null && respone.IsSuccess)
             {
                 lstCoupon = JsonConvert.DeserializeObject<List<CouponDTO>>(Convert.ToString(respone.Result));
-                View(lstCoupon);
+                return View(lstCoupon);
             }
             else
             {
