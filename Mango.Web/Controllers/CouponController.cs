@@ -16,12 +16,17 @@ namespace Mango.Web.Controllers
         {
             ResponseDTO respone = await _couponService.GetAllCouponAsync();
             List<CouponDTO> lstCoupon = null;
-            if (respone.IsSuccess)
+            if (respone!= null && respone.IsSuccess)
             {
                 lstCoupon = JsonConvert.DeserializeObject<List<CouponDTO>>(Convert.ToString(respone.Result));
+                View(lstCoupon);
+            }
+            else
+            {
+                TempData["error"] = respone.Message;
             }
 
-            return View(lstCoupon);
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> CouponCreate()
