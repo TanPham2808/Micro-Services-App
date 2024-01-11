@@ -15,18 +15,22 @@ namespace Mango.Services.AuthAPI.Service
         {
             _jWTOption = jWTOption.Value;
         }
-        public string GenerateToken(ApplicationUser applicationUser)
+        public string GenerateToken(ApplicationUser applicationUser, IEnumerable<string> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             
             var keySecrect= Encoding.ASCII.GetBytes(_jWTOption.Secret);
 
+            // Các giá trị cơ bản của user add vào token mã hóa
             var claimList = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Email,applicationUser.Name),
                 new Claim(JwtRegisteredClaimNames.Sub,applicationUser.Id),
                 new Claim(JwtRegisteredClaimNames.Name,applicationUser.UserName)
             };
+
+            // Add role của user vào trong token
+            claimList.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var tokenDescription = new SecurityTokenDescriptor
             {

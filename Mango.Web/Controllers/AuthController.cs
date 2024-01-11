@@ -40,7 +40,7 @@ namespace Mango.Web.Controllers
                 LoginResponseDTO loginResponseDTO = 
                     JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(responseDTO.Result));
 
-                // Xác định và lưu danh tính user vào Claim
+                // Xác định và lưu danh tính nhận dạng user
                 await SignInUser(loginResponseDTO);
 
                 // Set token sau khi login thanh cong
@@ -118,9 +118,10 @@ namespace Mango.Web.Controllers
         {
             var handler = new JwtSecurityTokenHandler();
 
+            //Giải mã token
             var jwt = handler.ReadJwtToken(model.Token);
 
-            // Định danh user
+            // Định danh user cùng với các giá trị được giải
             var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
             identity.AddClaim(new Claim(JwtRegisteredClaimNames.Email, 
                 jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email).Value));  
@@ -131,10 +132,14 @@ namespace Mango.Web.Controllers
 
             identity.AddClaim(new Claim(ClaimTypes.Name,
                 jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email).Value));
+            identity.AddClaim(new Claim(ClaimTypes.Role,
+                jwt.Claims.FirstOrDefault(u => u.Type == "role").Value));
 
+            // Định danh user vào biến principal
             var principal = new ClaimsPrincipal(identity);
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
+            // Đưa các giá trị vào Cookie
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
         }
     }
 }
