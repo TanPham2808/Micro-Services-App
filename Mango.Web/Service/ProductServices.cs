@@ -1,0 +1,46 @@
+﻿using Mango.Web.Models;
+using Mango.Web.Service.IService;
+using Mango.Web.Utility;
+
+namespace Mango.Web.Service
+{
+	public class ProductServices : IProductService
+	{
+		private readonly IBaseService _baseService;
+
+        public ProductServices(IBaseService baseService)
+        {
+			_baseService = baseService;
+
+		}
+
+        public Task<ResponseDTO> CreateProductAsync(CouponDTO couponDTO)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ResponseDTO> DeleteProductAsync(int id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public async Task<ResponseDTO> GetAllProductAsync()
+		{
+			return await _baseService.SendAsync(new RequestDTO
+			{
+				ApiType = Utility.SD.ApiType.GET,
+				Url = SD.ProductAPIBase + "/api/product"
+			});
+		}
+
+		public Task<ResponseDTO> GetProductByIdAsync(int id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ResponseDTO> UpdateProductAsync(CouponDTO couponDTO)
+		{
+			throw new NotImplementedException();
+		}
+	}
+}

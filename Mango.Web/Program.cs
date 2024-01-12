@@ -12,15 +12,19 @@ builder.Services.AddHttpContextAccessor(); // Dịch vụ này cung cấp quyề
 builder.Services.AddHttpClient(); // Cho phép bạn cấu hình và sử dụng các phiên bản HttpClient trong ứng dụng của bạn để thực hiện các yêu cầu HTTP đến các dịch vụ hoặc API khác.
 
 // AddHttpClient được sử dụng để đăng ký một dịch vụ HTTP client trong container dịch vụ của ứng dụng
+// Sử dụng để giao tiếp với các dịch vụ RESTful hoặc các endpoint HTTP khác
 builder.Services.AddHttpClient<ICouponService, CouponService>();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
+builder.Services.AddHttpClient<IProductService, ProductServices>();
 
 // Gán string localhost:700x từ config vào string để bên trong lấy ra sử dụng 
 SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"]; 
 SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
+SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
+builder.Services.AddScoped<IProductService, ProductServices>();
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 
