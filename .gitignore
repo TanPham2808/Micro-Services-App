@@ -401,3 +401,4 @@ Mango.Services.ProductAPI/Migrations/20240112042946_CreateTableProduct.Designer.
 Mango.Services.ProductAPI/Migrations/20240112043329_seedingProduct.cs
 Mango.Services.ProductAPI/Migrations/20240112043329_seedingProduct.Designer.cs
 Mango.Services.ProductAPI/Migrations/AppDbContextModelSnapshot.cs
+Mango.Services.ProductAPI/Mango.Services.ProductAPI.csproj
