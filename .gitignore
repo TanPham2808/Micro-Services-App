@@ -396,3 +396,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+Mango.Services.ProductAPI/Migrations/20240112042946_CreateTableProduct.cs
+Mango.Services.ProductAPI/Migrations/20240112042946_CreateTableProduct.Designer.cs
+Mango.Services.ProductAPI/Migrations/20240112043329_seedingProduct.cs
+Mango.Services.ProductAPI/Migrations/20240112043329_seedingProduct.Designer.cs
+Mango.Services.ProductAPI/Migrations/AppDbContextModelSnapshot.cs
