@@ -41,66 +41,91 @@ namespace Mango.Web.Controllers
         }
 
         // GET: ProductController/Create
-        public ActionResult Create()
+        public ActionResult ProductCreate()
         {
             return View();
         }
 
         // POST: ProductController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> ProductCreate(ProductDTO model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+			if (ModelState.IsValid)
+			{
+				ResponseDTO respone = await _productService.CreateProductAsync(model);
+				if (respone != null && respone.IsSuccess)
+				{
+					TempData["success"] = "Coupon create successfully";
+					return RedirectToAction(nameof(ProductIndex));
+				}
+				else
+				{
+					TempData["error"] = respone?.Message;
+				}
+			}
+			return View(model);
+		}
 
         // GET: ProductController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> ProductEdit(int productId)
         {
-            return View();
-        }
+			ResponseDTO respone = await _productService.GetProductByIdAsync(productId);
+			if (respone.IsSuccess)
+			{
+				var product = JsonConvert.DeserializeObject<ProductDTO>(Convert.ToString(respone.Result));
+				return View(product);
+
+			}
+			return NotFound();
+		}
 
         // POST: ProductController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> ProductEdit(ProductDTO productDTO)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+			ResponseDTO respone = await _productService.UpdateProductAsync(productDTO);
+
+			if (respone!= null & respone.IsSuccess)
+			{
+				TempData["success"] = "Product update successfully";
+				return RedirectToAction(nameof(ProductIndex));
+			}
+			else
+			{
+				TempData["error"] = respone.Message;
+			}
+			return View();
+		}
 
         // GET: ProductController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> ProductDelete(int productId)
         {
-            return View();
+            ResponseDTO respone = await _productService.GetProductByIdAsync(productId);
+            if (respone.IsSuccess)
+            {
+                var product = JsonConvert.DeserializeObject<ProductDTO>(Convert.ToString(respone.Result));
+                return View(product);
+
+            }
+            return NotFound();
         }
 
         // POST: ProductController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> ProductDelete(ProductDTO productDTO)
         {
-            try
+            ResponseDTO respone = await _productService.DeleteProductAsync(productDTO.ProductId);
+
+            if (respone.IsSuccess)
             {
-                return RedirectToAction(nameof(Index));
+                TempData["success"] = "Product delete successfully";
+                return RedirectToAction(nameof(ProductIndex));
             }
-            catch
+            else
             {
-                return View();
+                TempData["error"] = respone.Message;
             }
+            return View();
         }
     }
 }

@@ -61,6 +61,8 @@ namespace Mango.Web.Service
 
                 switch (apiRespone.StatusCode)
                 {
+                    case HttpStatusCode.BadRequest:
+                        return new() { IsSuccess = false, Message = "Bad Request" };
                     case HttpStatusCode.NotFound:
                         return new() { IsSuccess = false, Message = "Not Found" };
                     case HttpStatusCode.Forbidden:

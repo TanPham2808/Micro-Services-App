@@ -11,36 +11,53 @@ namespace Mango.Web.Service
         public ProductServices(IBaseService baseService)
         {
 			_baseService = baseService;
-
 		}
 
-        public Task<ResponseDTO> CreateProductAsync(CouponDTO couponDTO)
+        public async Task<ResponseDTO> CreateProductAsync(ProductDTO productDTO)
 		{
-			throw new NotImplementedException();
-		}
+            return await _baseService.SendAsync(new RequestDTO
+            {
+                ApiType = SD.ApiType.POST,
+                Data = productDTO,
+                Url = SD.ProductAPIBase + $"/api/product/"
+            });
+        }
 
-		public Task<ResponseDTO> DeleteProductAsync(int id)
+		public async Task<ResponseDTO> DeleteProductAsync(int id)
 		{
-			throw new NotImplementedException();
-		}
+            return await _baseService.SendAsync(new RequestDTO
+            {
+                ApiType = SD.ApiType.DELETE,
+                Url = SD.ProductAPIBase + $"/api/product/{id}"
+            });
+        }
 
 		public async Task<ResponseDTO> GetAllProductAsync()
 		{
 			return await _baseService.SendAsync(new RequestDTO
 			{
-				ApiType = Utility.SD.ApiType.GET,
+				ApiType = SD.ApiType.GET,
 				Url = SD.ProductAPIBase + "/api/product"
 			});
 		}
 
-		public Task<ResponseDTO> GetProductByIdAsync(int id)
+		public async Task<ResponseDTO> GetProductByIdAsync(int id)
 		{
-			throw new NotImplementedException();
+			return await _baseService.SendAsync(new RequestDTO
+			{
+				ApiType = SD.ApiType.GET,
+				Url = SD.ProductAPIBase + $"/api/product/{id}"
+			});
 		}
 
-		public Task<ResponseDTO> UpdateProductAsync(CouponDTO couponDTO)
+		public async Task<ResponseDTO> UpdateProductAsync(ProductDTO productDTO)
 		{
-			throw new NotImplementedException();
+			return await _baseService.SendAsync(new RequestDTO
+			{
+				ApiType = SD.ApiType.PUT,
+				Data = productDTO,
+				Url = SD.ProductAPIBase + $"/api/product/{productDTO.ProductId}"
+			});
 		}
 	}
 }
