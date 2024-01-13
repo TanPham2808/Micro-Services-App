@@ -2,6 +2,7 @@
 using Mango.Services.ShoppingCartAPI.Data;
 using Mango.Services.ShoppingCartAPI.Models;
 using Mango.Services.ShoppingCartAPI.Models.DTO;
+using Mango.Services.ShoppingCartAPI.Service.IService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,49 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
         private ResponseDTO _res;
         private readonly IMapper _mapper;
 
-        public CartAPIController(AppDbContext db, IMapper mapper)
+        private IProductService _productService;
+
+        public CartAPIController(AppDbContext db, IMapper mapper, IProductService productService)
         {
             _db = db;
             _res = new ResponseDTO();
             _mapper = mapper;
+            _productService = productService;
         }
+
+        [HttpGet("GetCart/{userId}")]
+        public async Task<ResponseDTO> GetCart(string userId)
+        {
+            try
+            {
+                CartDTO cart = new()
+                {
+                    CartHeader = _mapper.Map<CartHeaderDTO>(_db.CartHeaders.First(x => x.UserId == userId))
+                };
+                cart.CartDetails = _mapper.Map<IEnumerable<CartDetailDTO>>(_db.CartDetails.Where(x => x.CartHeaderId == cart.CartHeader.CartHeaderId));
+
+                // Đây là API giỏ hàng nên về sản phẩm sẽ ko thể lấy được
+                // Danh sách sản phẩm call từ project Service Product API
+                IEnumerable<ProductDTO> productDTOs = await _productService.GetProducts();
+
+                foreach(var item in cart.CartDetails)
+                {
+                    item.Product = productDTOs.FirstOrDefault(x => x.ProductId == item.ProductId);
+                    cart.CartHeader.CartTotal += (item.Count * item.Product.Price);
+                }
+
+                _res.Result = cart;
+
+            }
+            catch (Exception ex)
+            {
+                _res.IsSuccess = false;
+                _res.Message = ex.Message;
+            }
+
+            return _res;
+        }
+
 
         [HttpPost("CartUpsert")]
         public async Task<ResponseDTO> CartUpsert(CartDTO cartDTO)
