@@ -13,7 +13,7 @@ namespace Mango.Services.ShoppingCartAPI.Models
         [NotMapped] // Ko tạo coloumn trong table
         public double Discount { get; set; }
         [NotMapped] // Ko tạo coloumn trong table
-        public double CartTotal { get;}
+        public double CartTotal { get; set; }
 
     }
 }
