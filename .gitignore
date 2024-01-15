@@ -402,3 +402,5 @@ Mango.Services.ProductAPI/Migrations/20240112043329_seedingProduct.cs
 Mango.Services.ProductAPI/Migrations/20240112043329_seedingProduct.Designer.cs
 Mango.Services.ProductAPI/Migrations/AppDbContextModelSnapshot.cs
 Mango.Services.ProductsAPI/Migrations/
+Mango.Services.ShoppingCartAPI/Migrations/20240115025521_ShoppingCartCreateTable.cs
+Mango.Services.ShoppingCartAPI/Migrations/20240115025521_ShoppingCartCreateTable.Designer.cs
