@@ -1,5 +1,6 @@
 ﻿using Azure.Messaging.ServiceBus;
 using Mango.Services.EmailAPI.Models;
+using Mango.Services.EmailAPI.Services;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -10,13 +11,15 @@ namespace Mango.Services.EmailAPI.Messaging
         private readonly string serviceBusConnectionString;
         private readonly string emailCartQueue;
         private readonly IConfiguration _configuration;
+        private readonly EmailService _emailService;
 
         /// Lắng nghe hàng đợi từ Azure
         private ServiceBusProcessor _emailCartProcessor;
 
-        public AzureServiceBusConsumer(IConfiguration configuration)
+        public AzureServiceBusConsumer(IConfiguration configuration, EmailService emailService)
         {
             _configuration = configuration;
+            _emailService = emailService;
 
             serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
             emailCartQueue = _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue");
@@ -49,7 +52,10 @@ namespace Mango.Services.EmailAPI.Messaging
             CartDTO? objMessage = JsonConvert.DeserializeObject<CartDTO>(body);
             try
             {
-                // TODO - Thông báo đã xử lý thành công và xóa trong queue của Azure
+                // Lưu email vào Database
+                await _emailService.EmailCartAndLog(objMessage);
+
+                // Thực hiện thành công và tiến hành xóa queue trên Service Bus
                 await args.CompleteMessageAsync(args.Message);
             }
             catch (Exception ex)
