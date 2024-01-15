@@ -28,6 +28,28 @@ namespace Mango.MessageBus
 
 			await sender.SendMessageAsync(finalMessage);
 			await client.DisposeAsync();
-		}
+
+
+            // CÁCH SEND THỨ 2:
+            //var message = new ServiceBusMessage()
+            //{
+            //    MessageId = Guid.NewGuid().ToString(),
+            //    Body = new BinaryData(Encoding.UTF8.GetBytes(requestBody)),
+            //    ContentType = "application/json"
+            //};
+
+            //var clientOptions = new ServiceBusClientOptions
+            //{
+            //    TransportType = ServiceBusTransportType.AmqpWebSockets
+            //};
+
+            //string connectString = configuration.GetSection("ServiceBus:ConnectionSecret").Value;
+            //string queueName = configuration.GetSection("ServiceBus:StaxbillQueueName").Value;
+
+            //var client = new ServiceBusClient(connectString, clientOptions);
+            //var sender = client.CreateSender(queueName);
+            //await sender.SendMessageAsync(message);
+            //await sender.CloseAsync();
+        }
 	}
 }
