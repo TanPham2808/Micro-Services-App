@@ -1,4 +1,4 @@
-using Mango.Services.Email.Data;
+﻿using Mango.Services.Email.Data;
 using Mango.Services.EmailAPI.Extension;
 using Mango.Services.EmailAPI.Messaging;
 using Microsoft.EntityFrameworkCore;
@@ -33,5 +33,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Triển khai services và lưu trữ ứng dụng khi có thông báo 
 app.UseAzureServiceBusConsumer();
 app.Run();
