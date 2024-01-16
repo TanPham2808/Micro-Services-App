@@ -52,7 +52,6 @@ namespace Mango.Web.Controllers
             var res = await _cartService.RemoveFromCartAsync(cartDetailId);
             if (res != null && res.IsSuccess)
             {
-                CartDTO cartDTO = JsonConvert.DeserializeObject<CartDTO>(Convert.ToString(res.Result));
                 TempData["success"] = "Remove product in cart success";
                 return RedirectToAction(nameof(CartIndex));
             }
