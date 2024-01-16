@@ -23,6 +23,13 @@ namespace Mango.Web.Controllers
             return View(cartDTO);
         }
 
+        [Authorize]
+        public async Task<IActionResult> Checkout()
+        {
+            var cartDTO = await LoadCartDTOBaseOnLoggedInUser();
+            return View(cartDTO);
+        }
+
         private async Task<CartDTO> LoadCartDTOBaseOnLoggedInUser()
         {
             // Lấy UserID từ claim
