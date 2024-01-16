@@ -24,12 +24,12 @@ namespace Mango.GatewaySolution
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateIssuerSigningKey = true,
-                        ValidAudience = builder.Configuration["ApiSettings:JwtOptions:Audience"],
-                        ValidIssuer = builder.Configuration["ApiSettings:JwtOptions:Issuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["ApiSettings:JwtOptions:Secret"]))
+                        ValidAudience = builder.Configuration["ApiSettings:Audience"],
+                        ValidIssuer = builder.Configuration["ApiSettings:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["ApiSettings:Secret"]))
                     };
                 });
-            
+
             return builder;
         }
     }
