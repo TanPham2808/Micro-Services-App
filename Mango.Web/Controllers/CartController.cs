@@ -27,6 +27,8 @@ namespace Mango.Web.Controllers
         public async Task<IActionResult> Checkout()
         {
             var cartDTO = await LoadCartDTOBaseOnLoggedInUser();
+
+            cartDTO.CartHeader.Email = User.Claims.Where(x => x.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
             return View(cartDTO);
         }
 

@@ -12,8 +12,7 @@ namespace Mango.Services.ShoppingCartAPI.Models.DTO
         public double CartTotal { get; set; }
 
         // Thông tin lưu trữ thêm
-        public string? FirstName { get; set;}
-        public string? LastName { get; set; }
+        public string? Name { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
     }

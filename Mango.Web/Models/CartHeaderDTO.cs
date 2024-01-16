@@ -12,9 +12,11 @@ namespace Mango.Web.Models
         public double CartTotal { get; set; }
 
         // Thông tin lưu trữ thêm
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
+        [Required]
+        public string? Name { get; set; }
+        [Required]
         public string? Phone { get; set; }
+        [Required]
         public string? Email { get; set; }
     }
 }
