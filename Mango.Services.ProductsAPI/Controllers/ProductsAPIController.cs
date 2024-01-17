@@ -147,6 +147,17 @@ namespace Mango.Services.ProductsAPI.Controllers
                     return _res;
                 }
 
+                if (!string.IsNullOrEmpty(product.ImageLocalPath))
+                {
+                    var oldFilePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), product.ImageLocalPath);
+                    FileInfo file = new FileInfo(oldFilePathDirectory);
+                    if (file.Exists)
+                    {
+                        file.Delete();
+                    }
+
+                }
+
                 _db.Products.Remove(product);
                 _db.SaveChanges();
             }
