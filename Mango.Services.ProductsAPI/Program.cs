@@ -42,6 +42,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseStaticFiles(); // Khai báo sử dụng file tĩnh wwwroot. Nếu ko thêm nó sẽ bỏ qua
 app.MapControllers();
 
 app.Run();

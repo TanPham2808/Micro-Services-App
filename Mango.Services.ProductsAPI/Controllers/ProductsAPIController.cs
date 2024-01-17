@@ -61,12 +61,35 @@ namespace Mango.Services.ProductsAPI.Controllers
 
         // POST api/<ProductAPIController>
         [HttpPost]
-        public ResponseDTO Post([FromBody] ProductDTO productDTO)
+        public ResponseDTO Post([FromForm] ProductDTO productDTO)
         {
             try
             {
                 Product product = _mapper.Map<Product>(productDTO);
                 _db.Products.Add(product);
+                _db.SaveChanges();
+
+                // Xử lý image
+                if (productDTO.Image != null)
+                {
+                    string fileName = product.ProductId + Path.GetExtension(productDTO.Image.FileName);
+                    string filePath = @"wwwroot\ProductImage\" + fileName;
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+                    using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
+                    {
+                        productDTO.Image.CopyTo(fileStream);
+                    }
+
+                    var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
+                    product.ImageUrl = baseUrl + "/ProductImage/" + fileName;
+                    product.ImageLocalPath = filePath;
+                }
+                else
+                {
+                    product.ImageUrl = "https://placehold.co/603x403";
+                }
+
+                _db.Products.Update(product);
                 _db.SaveChanges();
 
                 _res.Result = _mapper.Map<ProductDTO>(product);
