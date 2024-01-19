@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mango.Services.OrderAPI.Models.DTO;
 using Mango.Services.ShoppingCartAPI.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Mango.Services.OrderAPI.Controllers
 {

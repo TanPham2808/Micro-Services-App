@@ -207,7 +207,7 @@
     //----------------------------Order--------------------------------//
     // Tạo Order
     {
-      "DownstreamPathTemplate": "/api/order/CreateOrder",
+      "DownstreamPathTemplate": "/api/order/CreateOrder/",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -215,7 +215,7 @@
           "Port": 7004
         }
       ],
-      "UpstreamPathTemplate": "/api/order/CreateOrder",
+      "UpstreamPathTemplate": "/api/order/CreateOrder/",
       "UpstreamHttpMethod": [ "Post" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer"

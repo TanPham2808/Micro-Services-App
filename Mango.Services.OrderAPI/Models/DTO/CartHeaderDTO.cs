@@ -12,11 +12,8 @@ namespace Mango.Services.OrderAPI.Models
         public double CartTotal { get; set; }
 
         // Thông tin lưu trữ thêm
-        [Required]
         public string? Name { get; set; }
-        [Required]
         public string? Phone { get; set; }
-        [Required]
         public string? Email { get; set; }
     }
 }

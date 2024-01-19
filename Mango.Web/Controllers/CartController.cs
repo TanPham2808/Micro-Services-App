@@ -10,10 +10,12 @@ namespace Mango.Web.Controllers
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
+        private readonly IOrderService _orderService;
 
-        public CartController(ICartService cartService)
+        public CartController(ICartService cartService, IOrderService orderService)
         {
             _cartService = cartService;
+            _orderService = orderService;
         }
 
         [Authorize]
@@ -30,6 +32,30 @@ namespace Mango.Web.Controllers
 
             cartDTO.CartHeader.Email = User.Claims.Where(x => x.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
             return View(cartDTO);
+        }
+
+        [Authorize]
+        [ActionName("CheckOutCart")]
+        public async Task<IActionResult> Checkout(CartDTO cartDTO)
+        {
+            CartDTO cart = await LoadCartDTOBaseOnLoggedInUser();
+            cart.CartHeader.Phone = cartDTO.CartHeader.Phone;
+            cart.CartHeader.Email = cartDTO.CartHeader.Email;
+            cart.CartHeader.Name = cartDTO.CartHeader.Name;
+
+            var response = await _orderService.CreateOrderAsync(cart);
+            OrderHeaderDTO orderHeaderDTO = JsonConvert.DeserializeObject<OrderHeaderDTO>(Convert.ToString(response.Result));
+
+            if(response.IsSuccess)
+            {
+                // Mở cổng thanh toán Stripe
+            }
+            else
+            {
+                TempData["error"] = response.Message;
+            }
+
+            return RedirectToAction("Checkout");
         }
 
         private async Task<CartDTO> LoadCartDTOBaseOnLoggedInUser()
