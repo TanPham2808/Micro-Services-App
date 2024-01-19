@@ -14,8 +14,9 @@ namespace Mango.Services.OrderAPI.Models.DTO
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public DateTime OrderTime { get; set; }
+        public string? Status { get; set; }
         public string? PaymentIntentId { get; set; }
-        public string? StripeSessionId { get; }
+        public string? StripeSessionId { get; set; }
 
         // 1 đơn hàng có nhiều chi tiết đơn hàng
         public IEnumerable<OrderDetail> OrderDetails { get; set; }
