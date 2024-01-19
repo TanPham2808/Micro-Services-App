@@ -19,6 +19,6 @@ namespace Mango.Services.OrderAPI.Models.DTO
         public string? StripeSessionId { get; set; }
 
         // 1 đơn hàng có nhiều chi tiết đơn hàng
-        public IEnumerable<OrderDetail> OrderDetails { get; set; }
+        public IEnumerable<OrderDetailDTO> OrderDetails { get; set; }
     }
 }
