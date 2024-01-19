@@ -17,12 +17,14 @@ builder.Services.AddHttpClient<ICouponService, CouponService>();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddHttpClient<IProductService, ProductServices>();
 builder.Services.AddHttpClient<ICartService, CartService>();
+builder.Services.AddHttpClient<IOrderService, OrderService>();
 
 // Gán string localhost:700x từ config vào string để bên trong lấy ra sử dụng 
 SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"]; 
 SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 SD.ShoppingCartAPIBase = builder.Configuration["ServiceUrls:ShoppingCartAPI"];
+SD.OrderAPIBase = builder.Configuration["ServiceUrls:OrderAPI"];
 
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
@@ -30,6 +32,7 @@ builder.Services.AddScoped<IProductService, ProductServices>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Thêm xác thực thông qua cookie 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

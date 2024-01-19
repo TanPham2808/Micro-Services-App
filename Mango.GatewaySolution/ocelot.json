@@ -202,10 +202,25 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer"
       }
+    },
+
+    //----------------------------Order--------------------------------//
+    // Tạo Order
+    {
+      "DownstreamPathTemplate": "/api/order/CreateOrder",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7004
+        }
+      ],
+      "UpstreamPathTemplate": "/api/order/CreateOrder",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
     }
-
-
-
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:7777"
