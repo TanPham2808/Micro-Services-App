@@ -124,7 +124,7 @@
 
     // Apply (remove) Coupon cho Cart
     {
-      "DownstreamPathTemplate": "/api/coupon/ApplyCoupon",
+      "DownstreamPathTemplate": "/api/cart/ApplyCoupon",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -132,7 +132,7 @@
           "Port": 7003
         }
       ],
-      "UpstreamPathTemplate": "/api/coupon/ApplyCoupon",
+      "UpstreamPathTemplate": "/api/cart/ApplyCoupon",
       "UpstreamHttpMethod": [ "Post" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer"
