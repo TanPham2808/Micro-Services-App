@@ -48,7 +48,7 @@ namespace Mango.Web.Controllers
 
             if(response.IsSuccess)
             {
-                // Mở cổng thanh toán Stripe
+                // Mở cổng thanh toán Stripe (get session stripe session)
             }
             else
             {
@@ -56,6 +56,11 @@ namespace Mango.Web.Controllers
             }
 
             return RedirectToAction("Checkout");
+        }
+
+        public async Task<IActionResult> Confirmation(int orderId)
+        {
+            return View(orderId);
         }
 
         private async Task<CartDTO> LoadCartDTOBaseOnLoggedInUser()
