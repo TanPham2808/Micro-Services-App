@@ -69,6 +69,14 @@ namespace Mango.Services.OrderAPI.Controllers
                     Mode = "payment",
                 };
 
+                var DiscountObj = new List<SessionDiscountOptions>()
+                {
+                    new SessionDiscountOptions
+                    {
+                        Coupon = stripeRequestDTO.OrderHeader.CouponCode
+                    }
+                };
+
                 foreach(var item in stripeRequestDTO.OrderHeader.OrderDetails)
                 {
                     var sessionLineItem = new SessionLineItemOptions
@@ -85,6 +93,12 @@ namespace Mango.Services.OrderAPI.Controllers
                         Quantity = item.Count
                     };
                     options.LineItems.Add(sessionLineItem);
+                }
+
+                // Kiểm tra tổng tiền có nhiều hơn tiền tối thiểu hay ko ? Nếu có mới áp dụng giảm giá
+                if(stripeRequestDTO.OrderHeader.Discount > 0)
+                {
+                    options.Discounts = DiscountObj;
                 }
 
                 var service = new SessionService();
