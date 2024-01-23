@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "wUmLrm6xl+7CY3npP3FCyjpvYmccJprKz1R+4O6qTTg=",
+  "Hash": "0BpcJLU8hRwBMfGBLbordIUUU7kwkUs/YSv+fPBYH78=",
   "Source": "Mango.Services.AuthAPI",
   "BasePath": "_content/Mango.Services.AuthAPI",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Learning\\5. MicroService_MVC\\Mango\\Mango.Services.EmailAPI\\Mango.Services.EmailAPI.csproj",
+      "Version": 2,
+      "Source": "Mango.Services.EmailAPI",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

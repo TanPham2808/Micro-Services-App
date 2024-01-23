@@ -10,11 +10,13 @@ namespace Mango.Services.EmailAPI.Messaging
     {
         private readonly string serviceBusConnectionString;
         private readonly string emailCartQueue;
+        private readonly string registerUserQueue;
         private readonly IConfiguration _configuration;
         private readonly EmailService _emailService;
 
         /// Lắng nghe hàng đợi từ Azure
         private ServiceBusProcessor _emailCartProcessor;
+        private ServiceBusProcessor _emailUserRegisterProcessor;
 
         public AzureServiceBusConsumer(IConfiguration configuration, EmailService emailService)
         {
@@ -23,10 +25,12 @@ namespace Mango.Services.EmailAPI.Messaging
 
             serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
             emailCartQueue = _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue");
+            registerUserQueue = _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue");
 
             var client = new ServiceBusClient(serviceBusConnectionString);
             _emailCartProcessor = client.CreateProcessor(emailCartQueue);
 
+            _emailUserRegisterProcessor = client.CreateProcessor(registerUserQueue);
         }
 
         public async Task Start()
@@ -34,6 +38,10 @@ namespace Mango.Services.EmailAPI.Messaging
             _emailCartProcessor.ProcessMessageAsync += OnEmailCartRequestReceived;
             _emailCartProcessor.ProcessErrorAsync += ErrorHandler;
             await _emailCartProcessor.StartProcessingAsync();
+
+            _emailUserRegisterProcessor.ProcessMessageAsync += OnEmailRegisterUser;
+            _emailUserRegisterProcessor.ProcessErrorAsync += ErrorHandler;
+            await _emailUserRegisterProcessor.StartProcessingAsync();
         }
 
         public async Task Stop()
@@ -41,6 +49,31 @@ namespace Mango.Services.EmailAPI.Messaging
             // Dừng quá trình xử lý
             await _emailCartProcessor.StopProcessingAsync();
             await _emailCartProcessor.DisposeAsync();
+
+            // Dừng quá trình xử lý
+            await _emailUserRegisterProcessor.StopProcessingAsync();
+            await _emailUserRegisterProcessor.DisposeAsync();
+        }
+
+        private async Task OnEmailRegisterUser(ProcessMessageEventArgs args)
+        {
+            // Nơi nhận tin nhắn được Service Bus trả về
+            var message = args.Message;
+            var body = Encoding.UTF8.GetString(message.Body);
+
+            string objMessage = JsonConvert.DeserializeObject<string>(body);
+            try
+            {
+                // Lưu email vào Database
+                await _emailService.EmailRegister(objMessage);
+
+                // Thực hiện thành công và tiến hành xóa queue trên Service Bus
+                await args.CompleteMessageAsync(args.Message);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         private async Task OnEmailCartRequestReceived(ProcessMessageEventArgs args)

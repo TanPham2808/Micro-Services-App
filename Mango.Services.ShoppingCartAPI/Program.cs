@@ -37,6 +37,7 @@ builder.Services.AddScoped<BackendApiAuthentivationHttpClientHander>();
 builder.Services.AddHttpClient(
     "Product", u => u.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"]))
     .AddHttpMessageHandler<BackendApiAuthentivationHttpClientHander>();
+
 builder.Services.AddHttpClient("Coupon", u => u.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CouponAPI"]))
     .AddHttpMessageHandler<BackendApiAuthentivationHttpClientHander>();
 

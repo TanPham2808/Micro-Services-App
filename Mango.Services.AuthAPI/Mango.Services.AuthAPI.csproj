@@ -21,4 +21,9 @@
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mango.MessageBus\Mango.MessageBus.csproj" />
+    <ProjectReference Include="..\Mango.Services.EmailAPI\Mango.Services.EmailAPI.csproj" />
+  </ItemGroup>
+
 </Project>

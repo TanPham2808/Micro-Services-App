@@ -113,6 +113,7 @@ namespace Mango.Web.Controllers
                 TempData["success"] = "Apply coupon success";
                 return RedirectToAction(nameof(CartIndex));
             }
+
             return View();
         }
 
@@ -126,7 +127,7 @@ namespace Mango.Web.Controllers
                 TempData["success"] = "Remove coupon success";
                 return RedirectToAction(nameof(CartIndex));
             }
-            return View();
+            return RedirectToAction(nameof(CartIndex));
         }
 
 
