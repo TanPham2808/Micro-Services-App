@@ -1,5 +1,6 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Service.IService;
+using Mango.Web.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -53,6 +54,7 @@ namespace Mango.Web.Controllers
 
                 StripeRequestDTO stripeRequestDTO = new()
                 {
+                    // Nếu thanh toán thành công, Stripe sẽ bắn đến action Confirm
                     ApprovedUrl = domain + "cart/Confirmation?orderId=" + orderHeaderDTO.OrderHeaderId,
                     CancelUrl = domain + "cart/CheckOutCart",
                     OrderHeader = orderHeaderDTO
@@ -80,6 +82,16 @@ namespace Mango.Web.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Confirmation(int orderId)
         {
+            var res = await _orderService.ValidateStripeSession(orderId);
+            if (res != null && res.IsSuccess)
+            {
+                OrderHeaderDTO orderHeader = JsonConvert.DeserializeObject<OrderHeaderDTO>(Convert.ToString(res.Result));
+                if(orderHeader.Status == SD.Status_Approved)
+                {
+                    return View(orderId);
+                }
+            }
+            // Chuyển hướng đến trang lỗi (ở đây ko làm)
             return View(orderId);
         }
 

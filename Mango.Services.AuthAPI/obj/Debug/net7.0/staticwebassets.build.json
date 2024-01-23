@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "0BpcJLU8hRwBMfGBLbordIUUU7kwkUs/YSv+fPBYH78=",
+  "Hash": "kpqYOaS/PxYdErlKAMXqgX4/QM+OjzflWJxuFACpY3c=",
   "Source": "Mango.Services.AuthAPI",
   "BasePath": "_content/Mango.Services.AuthAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\Learning\\5. MicroService_MVC\\Mango\\Mango.Services.EmailAPI\\Mango.Services.EmailAPI.csproj",
+      "Identity": "D:\\Learning\\MicroServices_Learning\\Mango.Services.EmailAPI\\Mango.Services.EmailAPI.csproj",
       "Version": 2,
       "Source": "Mango.Services.EmailAPI",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

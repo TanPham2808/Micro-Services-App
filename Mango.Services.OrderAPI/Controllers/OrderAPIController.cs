@@ -124,6 +124,43 @@ namespace Mango.Services.OrderAPI.Controllers
         }
 
         [Authorize]
+        [HttpPost("ValidateStripeSession")]
+        public async Task<ResponseDTO> ValidateStripeSession([FromBody] int orderHeaderId)
+        {
+            try
+            {
+                OrderHeader orderHeader = _db.OrderHeaders.First(x => x.OrderHeaderId == orderHeaderId);
+
+
+                var service = new SessionService();
+                Session session = service.Get(orderHeader.StripeSessionId);
+
+                var paymentIntentService = new PaymentIntentService();
+                PaymentIntent paymentIntent = paymentIntentService.Get(session.PaymentIntentId);
+
+                // Thanh toán thành công
+                if(paymentIntent.Status == "succeeded")
+                {
+                    orderHeader.PaymentIntentId = paymentIntent.Id;
+                    orderHeader.Status = SD.Status_Approved;
+                    _db.SaveChanges();
+
+                    _res.Result = _mapper.Map<OrderHeaderDTO>(orderHeader);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                _res.IsSuccess = false;
+                _res.Message = ex.Message;
+            }
+
+            return _res;
+        }
+
+
+        [Authorize]
         [HttpGet("GetOrders")]
         public ResponseDTO Get(string? userId = "")
         {
