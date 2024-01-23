@@ -1,6 +1,7 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Service.IService;
 using Mango.Web.Utility;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Mango.Web.Service
 {
@@ -29,6 +30,34 @@ namespace Mango.Web.Service
                 ApiType = SD.ApiType.POST,
                 Data = stripeRequestDTO,
                 Url = SD.OrderAPIBase + $"/api/order/CreateStripeSession"
+            });
+        }
+
+        public async Task<ResponseDTO> GetAllOrder(string? userId)
+        {
+            return await _baseService.SendAsync(new RequestDTO
+            {
+                ApiType = SD.ApiType.GET,
+                Url = SD.OrderAPIBase + $"/api/order/GetOrders/?userId=" + userId
+            });
+        }
+
+        public async Task<ResponseDTO> GetOrder(int orderId)
+        {
+            return await _baseService.SendAsync(new RequestDTO
+            {
+                ApiType = SD.ApiType.GET,
+                Url = SD.OrderAPIBase + $"/api/order/GetOrder/" + orderId
+            });
+        }
+
+        public async Task<ResponseDTO> UpdateOrderStatus(int orderId, string newStatus)
+        {
+            return await _baseService.SendAsync(new RequestDTO
+            {
+                ApiType = SD.ApiType.POST,
+                Data = newStatus,
+                Url = SD.OrderAPIBase + $"/api/order/UpdateOrderStatus/"+orderId
             });
         }
     }

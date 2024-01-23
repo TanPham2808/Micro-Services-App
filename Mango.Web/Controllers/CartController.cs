@@ -73,6 +73,11 @@ namespace Mango.Web.Controllers
             return RedirectToAction("Checkout");
         }
 
+        /// <summary>
+        /// Sau khi thanh toán sẽ tự gọi đến function này do đã khai báo trong function Checkout
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Confirmation(int orderId)
         {
             return View(orderId);
